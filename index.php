@@ -1,4 +1,6 @@
 <?php
+session_start();
 require_once 'config/config.php';
 require_once 'router.php';
-require_once 'autoload.php';
+//route($routes);
+//require_once 'autoload.php';

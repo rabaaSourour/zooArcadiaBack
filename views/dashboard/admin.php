@@ -12,7 +12,6 @@
             <li><a href="/animals">Gérer les animaux</a></li>
             <li><a href="/habitats">Gérer les habitats</a></li>
             <li><a href="/services">Gérer les services</a></li>
-            <li><a href="/reviews/pending">Valider les avis</a></li>
         </ul>
     </nav>
 </body>

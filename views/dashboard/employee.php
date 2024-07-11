@@ -10,8 +10,7 @@
         <ul>
             <li><a href="/animal_foods">Voir les nourritures des animaux</a></li>
             <li><a href="/animal_food/create">Ajouter une nourriture</a></li>
-            <li><a href="/habitats">Gérer les habitats</a></li>
-            <li><a href="/services">Gérer les services</a></li>
+            <li><a href="/opening_hours">Gérer les horaires d'ouverture</a></li>
             <li><a href="/reviews/pending">Valider les avis</a></li>
         </ul>
     </nav>

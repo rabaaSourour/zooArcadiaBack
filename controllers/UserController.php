@@ -9,6 +9,7 @@ class UserController {
     }
 
     public function register() {
+        session_start();
         if ($_SESSION['role'] !== 'admin') {
             echo 'Accès refusé. Seul un admin peut créer des comptes.';
             exit;
@@ -35,17 +36,17 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
-            $role = $_POST['role'];
 
             $user = $this->userModel->getByEmail($email);
 
-            if ($user && password_verify($password, $user['password']) && $user['role'] === $role && in_array($role, ['admin', 'veterinaire', 'employee'])) {
+            if ($user && password_verify($password, $user['password']) && in_array($user['role'], ['admin', 'veterinaire', 'employee'])) {
+                session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['role'] = $user['role'];
                 header('Location: /');
                 exit;
             } else {
-                echo 'Email, mot de passe ou rôle incorrect.';
+                echo 'Email ou mot de passe incorrect, ou rôle non autorisé.';
             }
         }
 
@@ -53,11 +54,14 @@ class UserController {
     }
 
     public function logout() {
+        session_start();
+        session_destroy();
         header('Location: /login');
         exit;
     }
 
     public function list() {
+        session_start();
         if ($_SESSION['role'] !== 'admin') {
             echo 'Accès refusé.';
             exit;
@@ -66,28 +70,8 @@ class UserController {
         $users = $this->userModel->getAll();
         require 'views/user/list.php';
     }
-
-    public function delete() {
-        if ($_SESSION['role'] !== 'admin') {
-            echo 'Accès refusé. Seul un admin peut supprimer des comptes.';
-            exit;
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userId = $_POST['user_id'];
-
-            if ($this->userModel->delete($userId)) {
-                header('Location: /users');
-                exit;
-            } else {
-                echo 'Erreur lors de la suppression du compte.';
-            }
-        }
-
-        $users = $this->userModel->getAll();
-        require 'views/user/list.php';
-    }
 }
 ?>
+
 
 
