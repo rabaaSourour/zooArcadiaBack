@@ -14,6 +14,9 @@ $routes = [
     '/service/create' => 'ServiceController@create',
     '/service/edit' => 'ServiceController@edit',
     '/delete_service' => 'ServiceController@delete',
+    '/veterinary_reports' => 'VeterinaryReportController@index',
+    '/veterinary_report/create' => 'VeterinaryReportController@create',
+    '/animal_food/create' => 'AnimalFoodsController@create',
     '/animal_foods' => 'AnimalFoodsController@index',
     '/fanimal_food/create' => 'AnimalFoodsController@create',
     '/login' => 'UserController@login',
@@ -30,6 +33,9 @@ $routes = [
     '/opening_hours/create' => 'OpeningHoursController@create',
     '/opening_hours/edit' => 'OpeningHoursController@edit',
     '/update_opening_hours' => 'OpeningHoursController@update',
+    '/api/animals' => 'ApiController@getAnimals',
+    '/api/habitats' => 'ApiController@getHabitats',
+    '/api/services' => 'ApiController@getServices',
 ];
 
 function route($routes) {
