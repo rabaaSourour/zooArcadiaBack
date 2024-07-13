@@ -21,7 +21,7 @@
             <?php foreach ($animals as $animal): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($animal['name']); ?></td>
-                    <td><?php echo htmlspecialchars($animal['species']); ?></td>
+                    <td><?php echo htmlspecialchars($animal['breed']); ?></td>
                     <td><?php echo htmlspecialchars($animal['habitat_name']); ?></td>
                     <td><img src="<?php echo htmlspecialchars($animal['image']); ?>" alt="<?php echo htmlspecialchars($animal['name']); ?>" style="width:100px;"></td>
                     <td>

@@ -13,7 +13,7 @@ $email = 'employee@example.com';
 $password = password_hash('your_password', PASSWORD_BCRYPT);
 $role = 'employee';
 
-if ($userModel->create($username, $email, $password, $role)) {
+if ($userModel->create($email, $password, $role)) {
     echo 'Employee user created successfully.<br>';
 } else {
     echo 'Error creating employee user.<br>';
@@ -24,7 +24,7 @@ $email = 'vet@example.com';
 $password = password_hash('your_password', PASSWORD_BCRYPT);
 $role = 'veterinaire';
 
-if ($userModel->create($username, $email, $password, $role)) {
+if ($userModel->create($email, $password, $role)) {
     echo 'Veterinaire user created successfully.<br>';
 } else {
     echo 'Error creating veterinaire user.<br>';

@@ -11,9 +11,9 @@ class Animal {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create($name, $species, $habitat_id, $image) {
-        $stmt = $this->pdo->prepare('INSERT INTO animals (name, species, habitat_id, image) VALUES (?, ?, ?, ?)');
-        return $stmt->execute([$name, $species, $habitat_id, $image]);
+    public function create($name, $breed, $habitat_id, $image) {
+        $stmt = $this->pdo->prepare('INSERT INTO animals (name, breed, habitat_id, image) VALUES (?, ?, ?, ?)');
+        return $stmt->execute([$name, $breed, $habitat_id, $image]);
     }
 
     public function delete($id) {

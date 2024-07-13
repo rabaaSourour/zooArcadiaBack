@@ -6,10 +6,10 @@ class User {
         $this->pdo = $pdo;
     }
 
-    public function create($username, $email, $password, $role) {
+    public function create($email, $password, $role) {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $this->pdo->prepare('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)');
-        return $stmt->execute([$username, $email, $hashedPassword, $role]);
+        $stmt = $this->pdo->prepare('INSERT INTO users (email, password, role) VALUES (?, ?, ?, ?)');
+        return $stmt->execute([$email, $hashedPassword, $role]);
     }
 
     public function getByEmail($email) {

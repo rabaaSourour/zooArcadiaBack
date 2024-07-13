@@ -33,9 +33,21 @@ $routes = [
     '/opening_hours/create' => 'OpeningHoursController@create',
     '/opening_hours/edit' => 'OpeningHoursController@edit',
     '/update_opening_hours' => 'OpeningHoursController@update',
-    '/api/animals' => 'ApiController@getAnimals',
-    '/api/habitats' => 'ApiController@getHabitats',
-    '/api/services' => 'ApiController@getServices',
+    '/api/animals' => 'ApiAnimalController@index',
+    '/api/animals/show' => 'ApiAnimalController@show',
+    '/api/animals/create' => 'ApiAnimalController@create',
+    '/api/animals/update' => 'ApiAnimalController@update',
+    '/api/animals/delete' => 'ApiAnimalController@delete',
+    '/api/habitats' => 'ApiHabitatController@index',
+    '/api/habitats/show' => 'ApiHabitatController@show',
+    '/api/habitats/create' => 'ApiHabitatController@create',
+    '/api/habitats/update' => 'ApiHabitatController@update',
+    '/api/habitats/delete' => 'ApiHabitatController@delete',
+    '/api/animals' => 'api/animals.php',
+    '/api/habitats' => 'api/habitats.php',
+    '/api/services' => 'api/services.php',
+    '/api/users' => 'api/users.php',
+    '/api/login' => 'api/login.php',
 ];
 
 function route($routes) {
@@ -67,4 +79,4 @@ function route($routes) {
         echo "Route non trouvée.";
     }
 }
-?>
+

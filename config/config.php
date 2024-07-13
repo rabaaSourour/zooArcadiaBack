@@ -8,7 +8,7 @@ define('DB_PASS', '');
 
 // Connexion à la base de données avec PDO
 try {
-    $pdo = new PDO('mysql:host=127.0.0.1;dbname=arcadia', 'root', '');
+    $pdo = new PDO('mysql:host=127.0.0.1;port=3306;dbname=arcadia', 'root', '');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
 } catch (PDOException $e) {

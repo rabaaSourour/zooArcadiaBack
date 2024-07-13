@@ -12,7 +12,7 @@ class FeedingLog {
     }
 
     public function create($animal_id, $user_id, $food, $quantity) {
-        $stmt = $this->pdo->prepare('INSERT INTO feeding_logs (animal_id, user_id, food, quantity) VALUES (?, ?, ?, ?)');
+        $stmt = $this->pdo->prepare('INSERT INTO animal_foods (animal_id, user_id, food, quantity) VALUES (?, ?, ?, ?)');
         return $stmt->execute([$animal_id, $user_id, $food, $quantity]);
     }
 }
