@@ -1,5 +1,13 @@
 <?php
 class DashboardController {
+    private $pdo;
+    private $mongoDb;
+
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+        $this->mongoDb = include 'config/mongodb.php';
+    }
+
     public function show() {
         session_start();
         if (!isset($_SESSION['user_id'])) {
