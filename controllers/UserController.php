@@ -1,5 +1,6 @@
 <?php
 require_once 'models/User.php';
+require_once 'MailController.php';
 
 class UserController {
     private $userModel;
@@ -16,17 +17,23 @@ class UserController {
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'];
             $email = $_POST['email'];
             $password = $_POST['password'];
             $role = $_POST['role'];
 
-            if ($this->userModel->create($username, $email, $password, $role)) {
+            if ($this->userModel->create($email, $password, $role)) {
                 header('Location: /users');
                 exit;
             } else {
                 echo 'Erreur lors de la création du compte.';
             }
+            
+            $mailController = new MailController();
+            $to = $_POST['email'];
+            $subject = 'Confirmation d\'inscription';
+            $body = 'Merci pour votre inscription.';
+
+            $mailController->sendMail($to, $subject, $body);
         }
 
         require 'views/user/register.php';
