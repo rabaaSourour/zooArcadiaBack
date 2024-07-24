@@ -17,7 +17,7 @@ class MailController
         $this->mail->isSMTP();
         $this->mail->Host = $config['host'];
         $this->mail->SMTPAuth = true;
-        $this->mail->Username = $config['username'];
+        $this->mail->Mail = $config['mail'];
         $this->mail->Password = $config['password'];
         $this->mail->SMTPSecure = $config['encryption'];
         $this->mail->Port = $config['port'];

@@ -1,11 +1,11 @@
 <?php
 class DashboardController {
     private $pdo;
-    private $mongoDb;
+    private $consultationsCollection;
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
-        $this->mongoDb = include 'config/mongodb.php';
+        $this->consultationsCollection = require __DIR__ . '/../config/mongodb.php';
     }
 
     public function show() {
@@ -30,6 +30,25 @@ class DashboardController {
                 echo 'Accès refusé.';
                 break;
         }
+        // Récupérer les consultations depuis MongoDB
+        $consultations = $this->consultationsCollection->find()->toArray();
+
+        // Joindre les données de consultations avec les informations des animaux depuis MySQL
+        $animalConsultations = [];
+        foreach ($consultations as $consultation) {
+            $animalId = $consultation['animal_id'];
+            $stmt = $this->pdo->prepare("SELECT * FROM animals WHERE id = ?");
+            $stmt->execute([$animalId]);
+            $animal = $stmt->fetch();
+            if ($animal) {
+                $animalConsultations[] = [
+                    'animal' => $animal,
+                    'consultations' => $consultation['count']
+                ];
+            }
+        }
+
+        require __DIR__ . '/../views/dashboard/show.php'; // Afficher la vue du dashboard
     }
 }
 ?>
