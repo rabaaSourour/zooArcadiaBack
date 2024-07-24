@@ -15,18 +15,23 @@ class UserController {
             echo 'Accès refusé. Seul un admin peut créer des comptes.';
             exit;
         }
+        $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+        if (!$email) {
+        die("Email invalide.");
+        }
+        $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
             $role = $_POST['role'];
 
-            if ($this->userModel->create($email, $password, $role)) {
-                header('Location: /users');
-                exit;
-            } else {
-                echo 'Erreur lors de la création du compte.';
-            }
+        if ($this->userModel->create($email, $password, $role)) {
+            header('Location: /users');
+            exit;
+        } else {
+            echo 'Erreur lors de la création du compte.';
+        }
             
             $mailController = new MailController();
             $to = $_POST['email'];
@@ -43,6 +48,7 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
+            $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
             $user = $this->userModel->getByEmail($email);
 
